@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <!-- Basic Page Needs
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta charset="utf-8">
+  <title>Omnivoltaic - Shadow API</title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!-- Mobile Specific Metas
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- FONT
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">
+
+  <!-- CSS
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/skeleton.css">
+
+  <!-- Favicon
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <link rel="icon" type="image/png" href="images/favicon.png">
+
+</head>
+
+<body>
+
+  <!-- Primary Page Layout
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+  <div class="container">
+    <div class="row">
+      <div class="twelve column" style="margin-top: 15%">
+        <h4>Omnivoltaic Shadow API</h4>
+        <div>
+          <p>
+            This API is meant to mirror Omnivoltaic OTP API (same requests & expected responses) but source data
+            from the Enterprise Resource Management (ERM) web system.
+          </p><br />
+
+          <h5>Requirements</h5>
+          <ol>
+            <li>Distributors should have an account on Enterprise Resource Management (ERM) web application. </li>
+            <li>Distributor data might be migrated from Legacy (B2B) account to ERM.</li>
+          </ol>
+
+
+          <h5>Usage</h5>
+          <p>
+            To migrate to these new API endpoints, the client should change the base URL link from
+            https://api.omnivoltaic.com/ to https://erm-shadow-api.omnivoltaic.com/ on their codebase. All other
+            endpoints have similar names for example login use https://erm-shadow-api.omnivoltaic.com/user/login which
+            is similar to the legacy endpoint https://api.omnivoltaic.com/user/login.
+
+          </p><br />
+          <p>
+            Developers should also expect the same response JSON structure as from the previous API. e.g after logging
+            in send the same payload POST request
+
+          </p>
+          <code>
+            { 
+              "username": "<your-https://erm.omnivoltaic.com/-email>",
+              "password": "<your-secure-password>"
+             }
+          </code>
+          <br />
+
+          <p>
+            Expected response
+          </p>
+          <code>
+            {
+              "accessToken": "<jwt-token>",
+                "user_role": "<your role>"
+                  }
+          </code><br />
+          <p>
+            <b>Note:</b> we have an exception on the response where you would expect string instead of int type. For
+            example,
+            when listing assigned items, you will get the same object JSON but unlike the Legacy API, assignedItemsID,
+            productItemID, and distributorID will be string, not int type.
+          </p>
+          <br />
+          <code>
+            {
+              "total": 9,<br/>
+              "results": [<br/>
+              {<br/>
+              "assignedItemsID": "507f1f77bcf86cd799439011",<br/>
+              "productItemID": "61800dc4bf5a3fe75eeb5d37",<br/>
+              "distributorID": "618e2c9434c1b72953dad999",<br/>
+              "itemAssignDate": "2021-11-01T16:00:51.750Z",<br/>
+              ....trancated
+          </code>
+
+          <h5>Other Resources</h5>
+          <p>
+            The API utilizes <a href="https://prod-federated-graphql-api.omnivoltaic.com/graphql" >Graphql</a> which developers can use to access.
+          </p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Document
+  –––––––––––––––––––––––––––––––––––––––––––––––––– -->
+</body>
+
+</html>
